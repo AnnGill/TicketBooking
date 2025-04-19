@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Movie ticket icon -->
+  <defs>
+    <linearGradient id="ticketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e88e5" />
+      <stop offset="100%" stop-color="#0d47a1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Ticket background -->
+  <rect x="50" y="150" width="412" height="212" rx="20" ry="20" fill="url(#ticketGradient)" />
+  
+  <!-- Ticket perforation -->
+  <path d="M50,170 L462,170" stroke="white" stroke-width="4" stroke-dasharray="10,10" />
+  <path d="M50,342 L462,342" stroke="white" stroke-width="4" stroke-dasharray="10,10" />
+  
+  <!-- Movie icon -->
+  <circle cx="150" cy="256" r="60" fill="white" />
+  <circle cx="150" cy="256" r="50" fill="#ff8f00" />
+  <path d="M130,226 L130,286 L180,256 Z" fill="white" />
+  
+  <!-- Ticket details -->
+  <text x="220" y="240" font-family="Arial" font-size="28" font-weight="bold" fill="white">MOVIETICKETS</text>
+  <text x="220" y="270" font-family="Arial" font-size="18" fill="white">ADMIT ONE</text>
+  <text x="220" y="300" font-family="Arial" font-size="14" fill="white">CINEMA EXPERIENCE</text>
+</svg>

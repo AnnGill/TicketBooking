@@ -1,0 +1,99 @@
+import { makeAutoObservable } from 'mobx';
+import { Movie, Comment } from '../types';
+
+class MovieStore {
+  movies: Movie[] = [];
+  selectedMovie: Movie | null = null;
+  loading: boolean = false;
+  error: string | null = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  // Load movies from API
+  async fetchMovies() {
+    this.loading = true;
+    try {
+      // In a real app, this would be an API call
+      // For demo purposes, we'll use mock data
+      const mockMovies: Movie[] = [
+        {
+          id: 1,
+          title: 'Avengers: Endgame',
+          description: 'After the devastating events of Avengers: Infinity War, the universe is in ruins.',
+          posterUrl: 'https://example.com/avengers-endgame.jpg',
+          trailerUrl: 'https://www.youtube.com/embed/TcMBFSGVi1c',
+          releaseDate: '2019-04-26',
+          duration: 181, // in minutes
+          genre: ['Action', 'Adventure', 'Sci-Fi'],
+          rating: 8.4,
+          comments: []
+        },
+        {
+          id: 2,
+          title: 'The Shawshank Redemption',
+          description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
+          posterUrl: 'https://example.com/shawshank-redemption.jpg',
+          trailerUrl: 'https://www.youtube.com/embed/6hB3S9bIaco',
+          releaseDate: '1994-10-14',
+          duration: 142,
+          genre: ['Drama'],
+          rating: 9.3,
+          comments: []
+        },
+        {
+          id: 3,
+          title: 'Inception',
+          description: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
+          posterUrl: 'https://example.com/inception.jpg',
+          trailerUrl: 'https://www.youtube.com/embed/YoHD9XEInc0',
+          releaseDate: '2010-07-16',
+          duration: 148,
+          genre: ['Action', 'Adventure', 'Sci-Fi'],
+          rating: 8.8,
+          comments: []
+        }
+      ];
+      
+      this.movies = mockMovies;
+      this.error = null;
+    } catch (error) {
+      this.error = 'Failed to fetch movies';
+      console.error('Error fetching movies:', error);
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  // Set selected movie
+  setSelectedMovie(movie: Movie | null) {
+    this.selectedMovie = movie;
+  }
+
+  // Select movie by ID
+  selectMovieById(id: number) {
+    const movie = this.movies.find(movie => movie.id === id);
+    if (movie) {
+      this.selectedMovie = movie;
+    }
+  }
+
+  // Add comment to selected movie
+  addComment(comment: Comment) {
+    if (this.selectedMovie) {
+      const updatedMovie = {
+        ...this.selectedMovie,
+        comments: [...this.selectedMovie.comments, comment]
+      };
+      this.selectedMovie = updatedMovie;
+      
+      // Update movie in the movies array
+      this.movies = this.movies.map(movie => 
+        movie.id === updatedMovie.id ? updatedMovie : movie
+      );
+    }
+  }
+}
+
+export default new MovieStore();
