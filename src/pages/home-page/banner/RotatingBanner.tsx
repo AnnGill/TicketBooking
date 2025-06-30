@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { bannerImages } from '../data/bannerImages';
+import { bannerImages } from '../../../data/bannerImages';
 import './RotatingBanner.scss';
 
 const RotatingBanner: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
   // Auto rotate through banners every 5 seconds
   useEffect(() => {
@@ -21,7 +21,7 @@ const RotatingBanner: React.FC = () => {
   const handleViewDetails = () => {
     // In a real app, this would navigate to the actual movie's page
     // For demo purposes, we'll just navigate to a dummy movie ID
-    navigate(`/movie/${currentIndex + 1}`);
+    // navigate(`/movie/${currentIndex + 1}`);
   };
   
   const handleBannerDotClick = (index: number) => {

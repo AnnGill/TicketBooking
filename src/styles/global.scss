@@ -10,12 +10,23 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #333;
-  background-color: #fafafa;
+  background-color: #000;
 }
 
 a {
@@ -23,25 +34,15 @@ a {
   color: inherit;
 }
 
-// Helper classes
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.text-center {
+.footer {
+  background: #000;
+  color: #fff;
+  margin: 0;
+  padding: 1rem 0;
   text-align: center;
-}
-
-// Responsive adjustments
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
+  margin-top: auto; // Pushes footer to the bottom
+  width: 100vw;     // Ensure full viewport width
+  left: 0;
+  position: relative;
+  box-sizing: border-box;
 }

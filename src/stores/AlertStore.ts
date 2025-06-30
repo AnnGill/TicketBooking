@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { createContext, useContext } from 'react';
 
 export enum AlertType {
   SUCCESS = 'success',
@@ -32,11 +33,11 @@ class AlertStore {
     // Set default values based on alert type
     let autoClose = type === AlertType.SUCCESS;
     let duration = autoClose ? 7000 : 6000;
-    
+
     // Override defaults with provided options if any
     if (options.autoClose !== undefined) autoClose = options.autoClose;
     if (options.duration !== undefined) duration = options.duration;
-    
+
     this.alert = {
       message,
       type,
@@ -55,37 +56,36 @@ class AlertStore {
 
   // Convenience methods for different alert types
   showSuccess(message: string, options?: { duration?: number, autoClose?: boolean }) {
-    // Success alerts auto-close after 7s by default
-    this.showAlert(message, AlertType.SUCCESS, { 
-      duration: 7000, 
+    this.showAlert(message, AlertType.SUCCESS, {
+      duration: 7000,
       autoClose: true,
-      ...options 
+      ...options
     });
   }
 
   showError(message: string, options?: { duration?: number, autoClose?: boolean }) {
-    // Error alerts don't auto-close by default
-    this.showAlert(message, AlertType.ERROR, { 
+    this.showAlert(message, AlertType.ERROR, {
       autoClose: false,
-      ...options 
+      ...options
     });
   }
 
   showInfo(message: string, options?: { duration?: number, autoClose?: boolean }) {
-    // Info alerts don't auto-close by default
-    this.showAlert(message, AlertType.INFO, { 
+    this.showAlert(message, AlertType.INFO, {
       autoClose: false,
-      ...options 
+      ...options
     });
   }
 
   showWarning(message: string, options?: { duration?: number, autoClose?: boolean }) {
-    // Warning alerts don't auto-close by default
-    this.showAlert(message, AlertType.WARNING, { 
+    this.showAlert(message, AlertType.WARNING, {
       autoClose: false,
-      ...options 
+      ...options
     });
   }
 }
 
-export default new AlertStore();
+const alertStoreContext = createContext(new AlertStore());
+export const useAlertStore = () => {
+  return useContext(alertStoreContext);
+};

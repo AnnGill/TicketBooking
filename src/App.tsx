@@ -1,14 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import Navbar from './components/Navbar';
 import HomePage from './pages/home-page/HomePage';
-import MovieDetailsPage from './pages/movie-detail-page/MovieDetailsPage';
-import BookingPage from './pages/booking-page/BookingPage';
-import AdminPage from './pages/admin-page/AdminPage';
-import LoginPage from './pages/login-page/LoginPage';
-import MapPage from './pages/map-page/MapPage';
-import ProtectedRoute from './components/ProtectedRoute';
-import AlertNotification from './components/AlertNotification';
 import './App.css';
 
 // Create a custom theme
@@ -47,31 +39,25 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Router>
-        <div className="app">
-          <AlertNotification />
-          <Navbar />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/movie/:movieId" element={<MovieDetailsPage />} />
-              <Route path="/booking/:movieId" element={<BookingPage />} />
-              <Route path="/map" element={<MapPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/admin" element={
-                <ProtectedRoute>
-                  <AdminPage />
-                </ProtectedRoute>
-              } />
-              <Route path="*" element={<HomePage />} />
-            </Routes>
-          </main>
-          <footer className="footer">
-            <p>© {new Date().getFullYear()} Movie Ticket Booking. All rights reserved.</p>
-          </footer>
-        </div>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          {/* <Route path="/movie/:movieId" element={<MovieDetailsPage />} /> */}
+          {/* <Route path="/booking/:movieId" element={<BookingPage />} /> */}
+          {/* <Route path="/map" element={<MapPage />} /> */}
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          {/* <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          } /> */}
+          <Route path="*" element={<HomePage />} />
+        </Routes>
       </Router>
+      <footer className="footer">
+          <p>© {new Date().getFullYear()} Movie Ticket Booking. All rights reserved.</p>
+      </footer>
     </ThemeProvider>
   )
 }
